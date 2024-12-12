@@ -12,7 +12,7 @@ public class MyString {
         System.out.println(randomStringOfLetters(7));
         System.out.println(remove("committee", "meet"));
         System.out.println(insertRandomly('s', "hello"));
-        System.out.println(subsetOf("s", "hello"));
+        System.out.println(subsetOf("pass", "space"));
 
 
     }
@@ -48,15 +48,32 @@ public class MyString {
      * @return true is str1 is a subset of str2, false otherwise
      */
     public static boolean subsetOf(String str1, String str2) {
-        boolean flag=true;
         for (int i=0;i<str1.length();i++)
         {
-            char c=str2.charAt(i);
-            if (str1.indexOf(c)==-1) {
-                flag=false;
+            char c=str1.charAt(i);
+            int str1_c=counter_c(str1, c);
+            int str2_c=counter_c(str2, c);
+            if(str1_c>str2_c)
+            {
+                return false;
+            }
+            if (str2.indexOf(c)==-1) {
+                return false;
             }
         }
-        return flag;
+        return true;
+    }
+
+    public static int counter_c(String str,char c)
+    {
+        int count=0;
+        for (int i=0;i<str.length();i++)
+        {
+            if (str.charAt(i)==c) {
+                count++;
+            }
+        }
+        return count;
     }
 
     /** Returns a string which is the same as the given string, with a space
@@ -106,8 +123,7 @@ public class MyString {
 
             randomString.append((char)random);
         }
-        System.out.println(randomString);
-        return null;
+        return randomString.toString();
     }
 
     /**
